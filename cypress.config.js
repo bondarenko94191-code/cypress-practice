@@ -7,5 +7,11 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+    baseUrl: "https://example.cypress.io",
+    retries: {
+      runMode: 2,
+      openMode: 2,
+    },
+    defaultCommandTimeout: 5000,
   },
 });
