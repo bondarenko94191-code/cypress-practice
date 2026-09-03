@@ -8,11 +8,11 @@ jobs:
     container:
       image: cypress/base:latest
       options: --user 1001
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-        - name: Cypress run with env
-          uses: cypress-io/github-action@v6
-          with:
-            env: host=api.dev.local,port=4222
+      - name: Cypress run with env
+        uses: cypress-io/github-action@v6
+        with:
+          env: host=api.dev.local,port=4222
