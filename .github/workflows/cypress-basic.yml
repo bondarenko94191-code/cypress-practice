@@ -16,8 +16,9 @@ jobs:
       image: cypress/base:latest
       options: --user 1001
     env:
-      MAIN_USER_EMAIL: ${{ secrets.MAIN_USER_EMAIL }}
-      MAIN_USER_PASSWORD: ${{ secrets.MAIN_USER_PASSWORD }}
+      BASE_URL: ${{ secrets.BASE_URL }}
+      CYPRESS_MAIN_USER_EMAIL: ${{ secrets.MAIN_USER_EMAIL }}
+      CYPRESS_MAIN_USER_PASSWORD: ${{ secrets.MAIN_USER_PASSWORD }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6

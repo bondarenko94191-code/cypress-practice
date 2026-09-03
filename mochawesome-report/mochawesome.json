@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2026-09-02T20:50:02.491Z",
-    "end": "2026-09-02T20:50:05.452Z",
-    "duration": 2961,
+    "start": "2026-09-03T21:47:49.474Z",
+    "end": "2026-09-03T21:47:52.525Z",
+    "duration": 3051,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "d958e4ec-3e95-4f64-9aa3-27e4c8c74163",
+      "uuid": "76501c0f-293d-4810-8e77-877df37e4431",
       "title": "",
       "fullFile": "cypress/e2e/tests/api/task3.cy.js",
       "file": "cypress/e2e/tests/api/task3.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "cab5feeb-874b-4ecd-8653-6ac2f8ac64b4",
+          "uuid": "c56ebe3d-1861-45c7-9690-95aae233db00",
           "title": "Login",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Should login with valid credentials",
               "fullTitle": "Login Should login with valid credentials",
               "timedOut": null,
-              "duration": 2933,
+              "duration": 3021,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -47,20 +47,20 @@
               "context": null,
               "code": "cy.intercept(\"**/profile\", req => {\n  req.continue(res => {\n    res.body.data.name = \"Polar\";\n    res.body.data.lastName = \"Bear\";\n  });\n});\n_SignInForm.default.login(Cypress.env(\"MAIN_USER_EMAIL\"), Cypress.env(\"MAIN_USER_PASSWORD\"));\ncy.url().should(\"include\", \"/panel/garage\");\n_FuelExpensesPage.default.userProfileDropdown.click();\ncy.contains(\".dropdown-item\", \"Profile\").click();\ncy.url().should(\"include\", \"/panel/profile\");",
               "err": {},
-              "uuid": "0632a77c-07f7-4114-acc0-ec41f188b8bf",
-              "parentUUID": "cab5feeb-874b-4ecd-8653-6ac2f8ac64b4",
+              "uuid": "8682209e-3b57-443c-8ace-7cdc27b30f47",
+              "parentUUID": "c56ebe3d-1861-45c7-9690-95aae233db00",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "0632a77c-07f7-4114-acc0-ec41f188b8bf"
+            "8682209e-3b57-443c-8ace-7cdc27b30f47"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 2933,
+          "duration": 3021,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
