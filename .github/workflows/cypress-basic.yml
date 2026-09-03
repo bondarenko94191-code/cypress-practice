@@ -1,0 +1,46 @@
+name: Test in Docker
+on:
+  push:
+    branches: [main, master]
+
+  pull_request:
+    branches: [main, master]
+
+  workflow_dispatch:
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    # Cypress Docker image from https://hub.docker.com/r/cypress
+    # with browsers pre-installed
+    container:
+      image: cypress/base:latest
+      options: --user 1001
+    env:
+      BASE_URL: ${{ secrets.BASE_URL }}
+      CYPRESS_MAIN_USER_EMAIL: ${{ secrets.MAIN_USER_EMAIL }}
+      CYPRESS_MAIN_USER_PASSWORD: ${{ secrets.MAIN_USER_PASSWORD }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests
+        run: npx cypress run
+
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots/
+          if-no-files-found: ignore
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: cypress-videos
+          path: cypress/videos/
+          if-no-files-found: ignore
