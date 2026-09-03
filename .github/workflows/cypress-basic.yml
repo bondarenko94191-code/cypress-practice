@@ -8,8 +8,11 @@ jobs:
     container:
       image: cypress/base:latest
       options: --user 1001
-    steps:
-      - uses: actions/checkout@v4
-      - uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Cypress run with env
+          uses: cypress-io/github-action@v6
+          with:
+            env: host=api.dev.local,port=4222
