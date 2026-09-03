@@ -1,5 +1,12 @@
 name: Test in Docker
-on: push
+on:
+  push:
+    branches: [main, master]
+
+  pull_request:
+    branches: [main, master]
+
+  workflow_dispatch:
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
@@ -8,11 +15,31 @@ jobs:
     container:
       image: cypress/base:latest
       options: --user 1001
+    env:
+      BASE_URL: ${{ secrets.BASE_URL }}
+      CYPRESS_BASE_URL: ${{ secrets.BASE_URL }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
-      - name: Cypress run with env
-        uses: cypress-io/github-action@v6
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests
+        run: npx cypress run
+
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
         with:
-          env: host=api.dev.local,port=4222
+          name: cypress-screenshots
+          path: cypress/screenshots/
+          if-no-files-found: ignore
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: cypress-videos
+          path: cypress/videos/
+          if-no-files-found: ignore
